@@ -6,6 +6,7 @@ from pathlib import Path
 
 HORIZONS = 5*(np.arange(26)+1)   # does 1 to 26 weeks
 
+# SP 500 stocks that have at least 25 years of data, total 352 stocks
 TICKERS = ["A" , "AAPL", "ABT", "ACGL","ADBE" , "ADI" , "ADM" , "ADP" , "ADSK" , "AEE" , "AEP" ,
 "AES" , "AFL" , "AIG" , "AJG" , "AKAM" , "ALB" , "ALL" , "AMAT" , "AMD" , "AME" , "AMGN",
  "AMT" , "AMZN" , "AON" , "AOS" , "APA" , "APD" , "APH" , "ARE" , "ATO" , "AVB",            # no "ANSS" 
