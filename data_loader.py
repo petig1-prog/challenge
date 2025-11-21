@@ -4,10 +4,41 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 
-HORIZONS = 5*(np.arange(26)+1)   # does 1 to 26 weeks, can also do [5, 10, 20, 40, 80, 160]
+HORIZONS = 5*(np.arange(26)+1)   # does 1 to 26 weeks
 
-TICKERS = ["^GSPC", "^DJI", "^FTSE", "AAPL", "MSFT", "AMZN", "JPM", "BTC-USD"]
-# GSPC data from 1927-12-30, DJI from 1992-01-02, MSFT from 1986-03-13
+TICKERS = ["A" , "AAPL", "ABT", "ACGL","ADBE" , "ADI" , "ADM" , "ADP" , "ADSK" , "AEE" , "AEP" ,
+"AES" , "AFL" , "AIG" , "AJG" , "AKAM" , "ALB" , "ALL" , "AMAT" , "AMD" , "AME" , "AMGN",
+ "AMT" , "AMZN" , "AON" , "AOS" , "APA" , "APD" , "APH" , "ARE" , "ATO" , "AVB",            # no "ANSS" 
+"AVY" , "AXP" , "AZO" , "BA" , "BAC" , "BALL" , "BAX" , "BBY" , "BDX" , "BEN" , "BIIB",
+"BK" , "BKNG" , "BKR" , "BLK" , "BMY" , "BRO" , "BSX" , "BXP" , "C" , "CAG" , "CAH",
+"CAT" , "CB" , "CCI" , "CCL" , "CDNS" , "CHD" , "CHRW" , "CI" , "CINF" , "CL" , "CLX",  
+"CMCSA" , "CMI" , "CMS" , "CNP" , "COF" , "COO" , "COP" , "COR" , "COST" , "CPB" , "CPRT",
+"CPT" , "CSCO" , "CSGP" , "CSX" , "CTAS" , "CTRA" , "CTSH" , "CVS" , "CVX" , "D" , "DD",
+"DE" , "DECK" , "DGX" , "DHI" , "DHR" , "DIS" , "DLTR" , "DOC" , "DOV" , "DRI" , "DTE",
+"DUK" , "DVA" , "DVN" , "EA" , "EBAY" , "ECL" , "ED" , "EFX" , "EG" , "EIX" , "EL",
+"EMN" , "EMR" , "EOG" , "EQR" , "EQT" , "ERIE" , "ES" , "ESS" , "ETN" , "ETR" , "EVRG",
+"EW" , "EXC" , "EXPD" , "F" , "FAST" , "FCX" , "FDS" , "FDX" , "FE" , "FFIV" , "FI",
+"FICO" , "FITB" , "FRT" , "GD" , "GE" , "GEN" , "GILD" , "GIS" , "GL" , "GLW" , "GPC", 
+"GS" , "GWW" , "HAL" , "HAS" , "HBAN" , "HD"  , "HIG" , "HOLX" , "HON" , "HPQ",    # no "HES"
+"HRL" , "HSIC" , "HST" , "HSY" , "HUBB" , "HUM" , "IBM" , "IDXX" , "IEX" , "IFF" , "INCY",
+"INTC" , "INTU" , "IP" , "IPG" , "IRM" , "IT" , "ITW" , "IVZ" , "J" , "JBHT" , "JBL",
+ "JCI" , "JKHY" , "JNJ" , "JPM" , "K" , "KEY" , "KIM" , "KLAC" , "KMB" , "KMX",   # no "JNPR"
+ "KO" , "KR" , "L" , "LEN" , "LH" , "LHX" , "LII" , "LIN" , "LLY" , "LMT" , "LNT",
+ "LOW" , "LRCX" , "LUV" , "MAA" , "MAR" , "MAS" , "MCD" , "MCHP" , "MCK" , "MCO" , "MDT",
+ "MET" , "MGM" , "MHK" , "MKC" , "MLM" , "MMC" , "MMM" , "MNST" , "MO" , "MOS" , "MRK",
+"MS" , "MSFT" , "MSI" , "MTB" , "MTCH" , "MTD" , "MU" , "NDSN" , "NEE" , "NEM" , "NI",
+"NKE" , "NOC" , "NSC" , "NTAP" , "NTRS" , "NUE" , "NVDA" , "NVR" , "O" , "ODFL" , "OKE",
+"OMC" , "ORCL" , "ORLY" , "OXY" , "PAYX" , "PCAR" , "PCG" , "PEG" , "PEP" , "PFE" , "PG", 
+ "PGR" , "PH" , "PHM" , "PKG" , "PLD" , "PNC" , "PNR" , "PNW" , "POOL" , "PPG" , "PPL",
+ "PSA" , "PTC" , "PWR" , "QCOM" , "RCL" , "REG" , "REGN" , "RF" , "RJF" , "RL" , "RMD",
+"ROK" , "ROL" , "ROP" , "ROST" , "RSG" , "RTX" , "RVTY" , "SBAC" , "SBUX" , "SCHW" , "SHW",
+ "SJM" , "SLB" , "SNA" , "SNPS" , "SO" , "SPG" , "SPGI" , "SRE" , "STE" , "STLD" , "STT",
+"STZ" , "SWK" , "SWKS" , "SYK" , "SYY" , "T" , "TAP" , "TDY" , "TECH" , "TER" , "TFC",
+ "TGT" , "TJX" , "TKO" , "TMO" , "TPL" , "TRMB" , "TROW" , "TRV" , "TSCO" , "TSN" , "TT", 
+"TTWO" , "TXN" , "TXT" , "TYL" , "UDR" , "UHS" , "UNH" , "UNP" , "UPS" , "URI" , "USB",
+"VLO" , "VMC" , "VRSN" , "VRTX" , "VTR" , "VTRS" , "VZ" , "WAB" , "WAT" , "WDC",    # no  "WBA"
+"WEC" , "WELL" , "WFC" , "WM" , "WMB" , "WMT" , "WRB" , "WSM" , "WST" , "WY" , "XEL",
+"XOM" , "YUM" , "ZBRA"]
 
 Path("cache").mkdir(exist_ok=True)
 all_data = []
@@ -17,6 +48,11 @@ print("Generating Q-Variance Challenge Dataset...")
 for ticker in TICKERS:
     print(f"→ {ticker}", end="")
     price = yf.download(ticker, period="max", progress=False, auto_adjust=True)["Close"]
+    
+    if ticker == "^FTSE":
+        price = price.iloc[2021:10355]
+        print('truncate FTSE data to match R so 1992-2024')
+    
     ret = np.log(price).diff().dropna().values
 
     rows = []
@@ -69,5 +105,3 @@ for ticker in TICKERS:
 full = pd.concat(all_data, ignore_index=True)
 full.to_parquet("prize_dataset.parquet", compression=None)
 print(f"\nSUCCESS! prize_dataset.parquet created with {len(full):,} clean rows")
-#print(f"^GSPC T=20: {len(full[(full.ticker=='^GSPC') & (full.T==20)])} windows")
-#print("z has NaNs:", full[(full.ticker=='^GSPC') & (full.T==20)]['z'].isna().sum())
