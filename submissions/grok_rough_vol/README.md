@@ -8,7 +8,7 @@
 
 **Global R²**: 0.8872 (on variance bins, zmax=0.6).
 
-**Result**: Captures asymmetry and tails well but cannot match the exact z²/2 scaling with ≤2 params. Quantum baseline (0.9528) wins.
+**Result**: Captures asymmetry and tails well but cannot match the exact z²/2 scaling with ≤2 params. Quantum baseline wins.
 
 **To use this submission** (auto-recombines):
 ```bash
