@@ -1,6 +1,6 @@
 # Q-Variance Challenge
 
-<img src="Figure_1.png" width="500"> <img src="Figure_3.png" width="500">
+<img src="Figure_1.png" width="400"> <img src="Figure_3.png" width="400">
 
 Can any continuous-time stochastic-volatility model reproduce the parabolic relationship  
 σ(z)² = σ₀² + (z-zoff)²/2
