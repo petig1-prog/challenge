@@ -101,3 +101,9 @@ Orrell D (2025) A Quantum Jump Model of Option Pricing. The Journal of Derivativ
 Orrell D (2025) Quantum impact and the supply-demand curve. Philosophical Transactions of the Royal Society A 383(20240562).
 
 Orrell D (2026) The Quantum Stock Market. MIT Press (in press).
+
+**Additional plots:**
+
+<img src="Figure_2.png" width="350"> <img src="Figure_3.png" width="350">
+
+Left panel shows data for T = 10, 20, 40 and 80 days. Right panel shows data for individual stocks.
