@@ -93,7 +93,7 @@ A: The quantum model predicts variance and the price-change distribution, but do
 
 Q: How was the quantum model derived?
 
-A: Details are in the references, but put simply the q-variance property is simply the equation for the variance of a perturbed quantum oscillator, which was derived by quantizing a linear entropic force and can be viewed as a first-order approximation to the price dynamics as they play out over a period.
+A: Details are in the references, but put simply the q-variance property is the equation for the variance of a perturbed quantum oscillator, which was derived by quantizing a linear entropic force and can be viewed as a first-order approximation to the price dynamics as they play out over a period.
 
 Q. What does the quantum model, or the behaviour of stocks, have to do with subatomic particles?
 
