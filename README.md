@@ -91,9 +91,13 @@ Q: What is the point in using a classical model if the quantum model is an almos
 
 A: The quantum model predicts variance and the price-change distribution, but does not provide a time series of daily prices. If a classical model can do that, and still produce the quadratic shape, then that will be very useful. We will therefore also give an honorable mention to any classical entry which can come close to matching the quantum model even if it involves extra parameters (though parsimony is important in order to understand how the model works, otherwise it is just a fitting exercise).
 
+Q: How was the quantum model derived?
+
+A: Details are in the references, but put simply the q-variance property is simply the equation for the variance of a perturbed quantum oscillator, which was derived by quantizing a linear entropic force and can be viewed as a first-order approximation to the price dynamics as they play out over a period.
+
 Q. What does the quantum model, or the behaviour of stocks, have to do with subatomic particles?
 
-A. Nothing, other than the fact that some problems which couple probability and dynamics in both physics and finance apparently benefit from using a type of probability that is based on complex numbers. And sometimes you have to trust the mathematics.
+A. Nothing, other than the fact that some problems which couple probability and dynamics in both physics and finance are best modelled using a type of probability that is based on complex numbers. And sometimes you have to trust the mathematics.
 
 Q: Can I use AI for the challenge?
 
