@@ -14,7 +14,7 @@ Repository contains:
 - Scoring engine
 - Live leaderboard
 - Baseline quantum fit
-- Plot Figure_1.png showing q-variance and R² value for the actual data
+- Plot [Figure 1](Figure_1.png) showing q-variance and R² value for the actual data
 
 For example, to try a rough vol model, simulate a long price series, compute sigma²(z) for each window, output new Parquet. You can also do multiple simulations: assign each a different ticker and the code will average over them as if they are different stocks.
 
@@ -74,6 +74,10 @@ Q: Does q-variance have implications for quantitative finance?
 
 A: Yes, classical finance assumes a diffusive model for price change, which does not produce q-variance. Standard formulas such as Black-Scholes or the formula used to calculate VIX will therefore not work as expected.
 
+Q: How does q-variance vary over different time periods, or from stock to stock?
+
+A: In theory the curve should be time-invariant, though in practice there is a small degree of variation, see [Figure 2](Figure_2.png). The results for individual stocks are of course noisier and have a different minimum volatility as shown in [Figure 3](Figure_3.png), but taking the average variance over a number of stocks smooths out this noise. You can experiment further using the [Qvar Shiny app](https://david-systemsforecasting.shinyapps.io/qvar/).
+
 Q: Is q-variance related to the implied volatility smile?
 
 A: Yes, however it is not the same thing because q-variance applies to realized volatility. But if you want to model implied volatility, a first step is to understand realized volatility.
@@ -82,15 +86,11 @@ Q: Is q-variance related to the price-change distribution over a period?
 
 A: Yes, it implies that price-change follows the q-distribution which is a particular time-invariant, Poisson-weighted sum of Gaussians (see further reading below). [Figure 4](Figure_4.png) compares the q-distribution with the average distribution over the S&P 500 stocks, where the distribution of each stock has been normalized by its standard deviation for comparability.
 
-Q: How does q-variance vary over different time periods, or from stock to stock?
-
-A: In theory the curve should be time-invariant, though in practice there is a small degree of variation, see [Figure 2](Figure_2.png). The results for individual stocks are of course noisier as shown in [Figure 3](Figure_3.png), but taking the average variance over a number of stocks smooths out this noise.
-
 Q: What is the point in using a classical model if the quantum model is an almost perfect match to the data?
 
 A: The quantum model predicts variance and the price-change distribution, but does not provide a time series of daily prices. If a classical model can do that, and still produce the quadratic shape, then that will be very useful. We will therefore also give an honorable mention to any classical entry which can come close to matching the quantum model even if it involves extra parameters (though parsimony is important in order to understand how the model works, otherwise it is just a fitting exercise).
 
-Q. What does this have to do with subatomic particles?
+Q. What does the quantum model, or the behaviour of stocks, have to do with subatomic particles?
 
 A. Nothing, other than the fact that some problems which couple probability and dynamics in both physics and finance apparently benefit from using a type of probability that is based on complex numbers. And sometimes you have to trust the mathematics.
 
