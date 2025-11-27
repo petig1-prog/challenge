@@ -11,7 +11,7 @@
 
 Because the rough volatility model lives in the risk-neutral world of classical finance, there is no parameter to shift the curve horizontally. To give a reasonable fit we have therefore added a parameter `zoff` even though it is inconsistent with the original approach.
 
-**Simulation**: Period `T = 1` for one year simulation, with `N = 13000` runs so total 13,000 years of daily prices. (Note we are abusing the model formalism a bit here by concatenating data from separate simulations to provide a single time series, but it seems to work.)
+**Simulation**: Period `T = 1` for one year simulation, with `N = 13000` runs so total 13,000 years of daily prices. Note we are abusing the model formalism a bit here by concatenating data from separate simulations to provide a single time series. This is unrealistic because the probability distribution of normalized price change `z` is not time-invariant for this model (it is more normal for short times) however the data serves for illustrative purposes.
 
 **Global R²**: **0.986**
 
