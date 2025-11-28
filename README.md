@@ -38,7 +38,7 @@ The challenge scores submissions on **one global R²** over the **entire dataset
 2. **Compute Variance**: Converts sigma → var = sigma².
 3. **Global Binning**: Bins z from -0.6 to 0.6 (delz=0.025), averages var per bin (as in `baseline_fit.py` global plot).
 4. **Fit**: Fits var = σ₀² + (z-zoff)²/2 to binned averages, computes R².
-5. **Threshold**: R² ≥ 0.995 with no more than three free parameters wins the challenge (agreement of quantum with data is 0.998). The price-change distribution in z should also be time-invariant, so the model should be independent of period length T.
+5. **Threshold**: R² ≥ 0.995 with no more than three free parameters (agreement of quantum with data is 0.998). The price-change distribution in z should also be time-invariant, so the model should be independent of period length T.
 
 ### Test Your Submission
 Run the test mode to score your Parquet:
