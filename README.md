@@ -60,7 +60,7 @@ python3 score_submission.py
 
 Q: What is q-variance – is it a well-known "stylized fact"?
 
-A: No, a stylized fact is just a general observation about market data. Q-variance is a **falsifiable prediction** because the multiplicative constant on the quadratic term is not a fit, it is set by theory at 0.5. The same formula applies for all period lengths T.
+A: No, a stylized fact is just a general observation about market data. Q-variance is a **falsifiable prediction** because the multiplicative constant on the quadratic term is not a fit, it is set by theory at 0.5. The same formula applies for all period lengths T. As far as we are aware this is the most clear-cut and easily tested example of a model prediction in finance.
 
 Q: Is q-variance a large effect?
 
