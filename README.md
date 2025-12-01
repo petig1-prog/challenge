@@ -40,7 +40,7 @@ Python dependencies: pip install yfinance pandas numpy scipy matplotlib pyarrow
 
 The challenge scores submissions on **one global R²** over the **entire dataset**. Since the q-variance parabola with $\sigma_0=0.255$ and $z_0 = 0.02$ gives a near-perfect fit (R² = 0.998) this curve can be used as a proxy for the real data. In other words, the aim is to fit the two-parameter parabola, using **up to three parameters** – must be easy, right?
 
-To get started, first simulate a long price series using your model, and save as a CSV file with a column named 'Price'. Then use `data_loader_csv.py` to compute the variances $\sigma^2(z)$ for each window and output the `dataset.parquet` file. The benchmark file has around 3 million rows, so you want a long simulation.
+To get started, first simulate a long series of daily prices using your model, and save as a CSV file with a column named 'Price'. Then use `data_loader_csv.py` to compute the variances $\sigma^2(z)$ for each window and output the `dataset.parquet` file. The benchmark file has around 3 million rows, so you want a long simulation.
 
 Next, use `score_submission.py` to read your `dataset.parquet` (must match format: ticker, date, T, z, sigma). This will bin the values of $z$ in the range from -0.6 to 0.6 as in the figure, and compute the average variance per bin. It also computes the R² of your binned averages to the q-variance curve $\sigma^2(z) = \sigma_0^2 + (z-z_0)^2/2$.
 
