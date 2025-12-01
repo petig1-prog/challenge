@@ -8,21 +8,23 @@ Q-variance states that, for a sufficiently large data set of stock prices, varia
 
 $\sigma^2(z) = \sigma_0^2 + \frac{(z-z_0)^2}{2}$
 
-where $z = x/\sqrt{T}$, and $x$ is the log price change over a period $T$, adjusted for drift (in theory $z_0=0$ but it is included to account for small asymmetries). The figure above illustrates q-variance for stocks from the S&P 500, and periods $T$ of 1-26 weeks. Blue points are variance vs $z$ for individual periods, blue line is average variance as a function of $z$, red line is the q-variance curve. Read the [Q-Variance Wilmott paper](Q-Variance_Wilmott_July2025.pdf) for more details.
+where $z = x/\sqrt{T}$, and $x$ is the log price change over a period $T$, adjusted for drift (the parameter $z_0$ accounts for small asymmetries). The figure above illustrates q-variance for stocks from the S&P 500, and periods $T$ of 1-26 weeks. Blue points are variance vs $z$ for individual periods, blue line is average variance as a function of $z$, red line is the q-variance curve. Read the [Q-Variance Wilmott paper](Q-Variance_Wilmott_July2025.pdf) for more details and examples.
 
-Q-variance is not an obscure phenomenon, it is a basic property of volatility, which affects everything from option pricing to how we measure and talk about volatility. To take part in the challenge, use your model to produce a long time series of simulated price data, and score it as described below.
+Q-variance is not an obscure phenomenon, it is a basic property of volatility, which affects everything from option pricing to how we measure and talk about volatility. Modelling volatility without it is like modelling the arc of a cannonball, not as a parabola, but as a straight line plus noise (not recommended).
+
+To take part in the challenge, use your model to produce a long time series of simulated price data, and score it as described below.
 
 ## Repository Contents
 
 The repository contains:
-- Parquet file in three parts containing price data for 352 stocks from the S&P 500 (stocks with less than 25 years of data excluded)
+- Parquet file in three parts containing price data for 352 stocks from the S&P 500 (stocks with less than $\sim 25$ years of data excluded)
 - Full dataset generator `data_loader.py` to show how the data was generated
 - Baseline model fit `baseline/baseline_fit.py`
 - Figures showing q-variance and R² value for the actual data
 - Scoring engine `code/score_submission.py` for your model
 - Jupyter notebook `notebooks/qvariance_single.ipynb` showing how to compute q-variance for a single asset
 
-The dataset used as a benchmark is for 352 stocks from the S&P 500 (>25 year history), with periods T of 1–26 weeks.  
+The dataset used as a benchmark is for 352 stocks from the S&P 500, with periods T of 1–26 weeks.  
 
 Columns: ticker (str), date (date), T (int), sigma (float, annualized vol), z (float, scaled log return).
 
@@ -41,7 +43,7 @@ To get started, first simulate a long price series using your model, then use `d
 
 Next, use `score_submission.py` to read your `dataset.parquet` (must match format: ticker, date, T, z, sigma). This will bin the values of $z$ in the range from -0.6 to 0.6, and compute the average variance per bin. It also computes the R² of your binned averages to the q-variance curve $\sigma^2(z) = \sigma_0^2 + (z-z_0)^2/2$.
 
-The threshold for the challenge is R² ≥ 0.995 with no more than three free parameters. The price-change distribution in $z$ should also be time-invariant, so the model should be independent of period length $T$. If your model doesn't tick all the boxes, please enter it anwyay because it may help rule out certain approaches or suggest ideas.
+The threshold for the challenge is R² ≥ 0.995 with no more than three free parameters. The price-change distribution in $z$ should also be time-invariant, so the model should be independent of period length $T$. If your model doesn't tick all the boxes, please enter it anwyay because it may qualify for an honourable mention.
 
 To make your entry official:
 
@@ -60,13 +62,13 @@ Q: Is q-variance a well-known "stylized fact"?
 
 A: No, a stylized fact is a general observation about market data, but q-variance is a **falsifiable prediction** because the multiplicative constant on the quadratic term is not a fit, it is set by theory at 0.5. The same formula applies for all period lengths T. As far as we are aware this is the most clear-cut and easily tested example of a model prediction in finance.
 
-Q: Is q-variance a large effect?
-
-A: Yes, the minimum variance is about half the total variance so this is a large effect. If you are modelling variance then you probably need to take q-variance into account. Otherwise it's like modelling the arc of a cannonball using a straight line plus noise (not recommended).
-
 Q: Has q-variance been previously reported in the literature?
 
 A: Not to our knowledge, and we have asked many experts, but please bring any references to our attention. If anyone has made the exact same prediction using a model then we will announce them the winner.
+
+Q: Is q-variance a large effect?
+
+A: Yes, the minimum variance is about half the total variance so this is a large effect. If you are modelling variance then you do need to take q-variance into account.
 
 Q: Does q-variance have implications for quantitative finance?
 
@@ -86,7 +88,7 @@ A: Yes, it implies that price-change follows the q-distribution which is a parti
 
 Q: Why should I enter this competition?
 
-A: For fun, an intellectual challenge, kudos. But also because, if your existing model of price behaviour doesn't do q-variance, then it is missing important market structure.
+A: For fun, an intellectual challenge, kudos ... but also because, if your existing model of price behaviour doesn't do q-variance, then it is missing important market structure.
 
 Q: Can I use AI for the challenge?
 
@@ -96,7 +98,7 @@ A: Yes, AI-assisted entries are encouraged. We used Grok to help design and code
 
 Wilmott P, Orrell D (2025) [Q-Variance: or, a Duet Concerning the Two Chief World Systems](Q-Variance_Wilmott_July2025.pdf). Wilmott 2025(138).
  
-Orrell D (2025) A Quantum Jump Model of Option Pricing. The Journal of Derivatives 33(2).
+Orrell D (2025) A Quantum Jump Model of Option Pricing. The Journal of Derivatives 33(2): 9-27.
 
 Orrell D (2025) Quantum impact and the supply-demand curve. Philosophical Transactions of the Royal Society A 383(20240562).
 
