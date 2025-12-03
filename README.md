@@ -10,7 +10,7 @@ $\sigma^2(z) = \sigma_0^2 + \frac{(z-z_0)^2}{2}$
 
 where $z = x/\sqrt{T}$, and $x$ is the log price change over the period, adjusted for drift (the parameter $z_0$ accounts for small asymmetries). The figure above illustrates q-variance for stocks from the S&P 500, and periods $T$ of 1-26 weeks. Blue points are variance vs $z$ for individual periods, blue line is average variance as a function of $z$, red line is the q-variance curve. 
 
-Q-variance affects everything from option pricing to how we measure and talk about volatility. Read the [Q-Variance Wilmott paper](Q-Variance_Wilmott_July2025.pdf) for more details and examples.
+Q-variance affects everything from option pricing to how we measure and talk about volatility. Read the [Q-Variance Wilmott article](Q-Variance_Wilmott_July2025.pdf) for more details and examples.
 
 To take part in the challenge, use your model to produce a long time series of simulated price data, and score it as described below.
 
