@@ -1,4 +1,4 @@
-# baseline_fit.py
+# score_submission.py
 # comment out lines to read files in 3 parts or 1 part
 import pandas as pd
 import numpy as np
@@ -69,7 +69,7 @@ def quantum_density(z, sig0, zoff=0.0):
     ns = np.arange(0, 6)
     qdn = np.zeros_like(z, dtype=float)
     sigvec = sig0 * np.sqrt(2 * ns + 1)
-    means = zoff * np.ones_like(ns)  # no drift term in pure Q-Variance
+    means = zoff * np.ones_like(ns)  - sigvec**2/2 # no drift term in pure Q-Variance
 
     for n in ns:
         weight = poisson.pmf(n, mu=0.5)
