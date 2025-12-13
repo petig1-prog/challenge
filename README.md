@@ -48,7 +48,7 @@ Next, simulate a long series of daily prices using your model, and save as a CSV
 
 Finally, use `score_submission.py` to read your `dataset.parquet` (must match format: ticker, date, T, z, sigma). This will bin the values of $z$ in the range from -0.6 to 0.6 as in the figure, and compute the average variance per bin. It also computes the R² of your binned averages to the q-variance curve $\sigma^2(z) = \sigma_0^2 + (z-z_0)^2/2$.
 
-The threshold for the challenge is R² ≥ 0.995 with no more than three free parameters. The price-change distribution in $z$ should also be time-invariant, so the model should be independent of period length $T$. If your model doesn't tick all the boxes, please enter it anyway because it may qualify for an honourable mention.
+The threshold for the challenge is R² ≥ 0.995 with no more than three free parameters. A free parameter includes parameters in the model that, when modified within reasonable bounds, affect the score. This includes tuning parameters such as base volatility or drift, but also parameters which are specifically set within the model to achieve q-variance (and note that if the model is unstable even apparently innocuous settings can influence the results). The price-change distribution in $z$ should also be time-invariant, so the model should be independent of period length $T$. If your model doesn't tick all the boxes, please enter it anyway because it may qualify for an honourable mention.
 
 To make your entry official:
 
