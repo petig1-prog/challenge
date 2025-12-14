@@ -15,8 +15,8 @@ import os
 
 # load the parquet files from data_loader.py
 
-if os.path.isfile("dataset_regime.parquet"):
-    df= pd.read_parquet("dataset_regime.parquet")  # READ SUBMISSION DATA
+if os.path.isfile("dataset.parquet"):
+    df= pd.read_parquet("dataset.parquet")  # READ SUBMISSION DATA
 else:
     df = pd.concat([pd.read_parquet("dataset_part1.parquet"),pd.read_parquet("dataset_part2.parquet"),pd.read_parquet("dataset_part3.parquet")])
 
