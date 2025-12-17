@@ -93,7 +93,7 @@ A: Yes, it implies that price-change follows the q-distribution which is a parti
 
 Q: How long a time series do we need?
 
-A: To reproduce Figure 1 you will need around 5e6 time points. That works out to about 20K years of data. However it isn't very realistic if q-variance is only visible over extremely long time periods, because with stocks you can see it with less than 20 years of data. [Figure 6](Figure_6.png) is a version of Figure 3 where we have used only periods of T=5 so the results are noisier. To compare your model, divide the data into 500 segments, each in a column labelled "V1", "V2", etc. and run `score_submission.py`. This will produce a plot like Figure 6, where now the separate columns are treated as representing individual stocks.
+A: To reproduce Figure 1 you will need around 5e6 time points. That works out to about 20K years of data. However it isn't very realistic if q-variance is only visible over extremely long time periods, because with stocks you can see it with less than 20 years of data. [Figure 6](Figure_6.png) is a version of Figure 3 where we have used only periods of T=5 so the results are noisier. To compare your model, divide the data into 500 segments, each in a column labelled "V1", "V2", etc., create your parquet file but only for periods T=5 (or filter this later), and run `score_submission.py`. This will produce a plot like Figure 6, where now the separate columns are treated as representing individual stocks.
 
 Q: Why should I enter this competition?
 
