@@ -75,4 +75,10 @@ This correction explicitly accounts for the 1/252 time step and avoids the syste
   \[
   \sigma^2(z;T) = \sigma_0^2 + q(T)\,(z - z_0)^2
   \]
-  with \(\sigma_0 = 0.259\) and \(z_0 = 0.021\) fixed, using only windows from `dataset_10K.parquet` (first 10k days). The dashed line at 0.5 shows the theoretical q-variance coefficient, and the empirical \(q(T)\) is approximately T-stable over the 10k-day horizon.
+  with \(\sigma_0 = 0.259\) and \(\ z_0 = 0.021\) fixed, using only windows from `dataset_10K.parquet` (first 10k days). The dashed line at 0.5 shows the theoretical q-variance coefficient.
+
+## Interpretation of the 10k-day q(T) plot
+
+The `tags_qT_first10k.png` figure shows that, using only the first 10,000 days of a single simulated path, the estimated quadratic coefficient \(q(T)\) lies in a relatively tight band (roughly 0.28–0.38) and is **approximately stable in T**, i.e. there is no strong systematic horizon dependence. This is the desired scale-invariance feature of the q-variance structure.
+
+The coefficients are systematically below the theoretical value 0.5, reflecting finite-sample effects and the fact that \(\sigma_0\) and \(z_0\) are held fixed while only \(q(T)\) is fitted on a single realisation. When the full 100k-day simulation is used (`dataset.parquet`), the global q-variance fit converges back to the canonical curve with \(R^2 \approx 0.9988\), consistent with the theoretical coefficient of 0.5.
