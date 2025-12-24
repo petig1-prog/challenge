@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Q-Variance Challenge Leaderboard</title>
+    <title>q-variance challenge leaderboard</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
+        body { font-family: arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
         h1 { color: #d9534f; text-align: center; }
         p { text-align: center; font-size: 14px; color: #333; }
         table { width: 100%; border-collapse: collapse; margin: 20px 0; background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
@@ -15,125 +15,63 @@
         .passed { background-color: #d4edda; }
         .failed { background-color: #f8d7da; }
         .loading { text-align: center; color: #6c757d; font-style: italic; }
-        .error { color: #dc3545; text-align: center; font-weight: bold; }
-        .no-subs { text-align: center; color: #6c757d; font-style: italic; }
     </style>
 </head>
 <body>
-    <h1>Q-Variance Challenge Leaderboard</h1>
-    <p>Target: Global R² ≥ 0.995 using ≤2 free parameters (continuous-time models only)</p>
-    
+
+    <h1>Q-variance challenge leaderboard</h1>
+    <p>target: global r² ≥ 0.995 using ≤3 free parameters (continuous-time models only)</p>
+
     <table id="leaderboard">
         <thead>
             <tr>
-                <th>Rank</th>
-                <th>Submission</th>
-                <th>Author</th>
-                <th>R²</th>
-                <th>Params</th>
-                <th>Status</th>
-                <th>Date</th>
+                <th>rank</th>
+                <th>submission</th>
+                <th>author</th>
+                <th>params</th>
+                <th>status</th>
+                <th>date</th>
+                <th>notes</th> <!-- 1. Added Header -->
             </tr>
         </thead>
         <tbody id="table-body">
-            <tr><td colspan="7" class="loading">Loading submissions from GitHub API...</td></tr>
+            <!-- 2. Updated colspan to 7 to match the new column count -->
+            <tr><td colspan="7" class="loading">loading submissions from github api...</td></tr>
         </tbody>
     </table>
 
     <script>
-        async function loadSubmissions() {
-            const body = document.getElementById('table-body');
-            body.innerHTML = '<tr><td colspan="7" class="loading">Fetching submissions...</td></tr>';
-            
-            // Fallback hardcoded rows (always show these if API fails)
-            const fallbackRows = [
-                { name: 'Quantum Baseline', author: 'David Orrell', r2: 0.9528, params: 1, status: 'Passed', date: '2025-07-01' },
-                { name: 'Grok Rough Vol', author: 'Grok (xAI)', r2: 0.8545, params: 4, status: 'Failed', date: '2025-11-21' }
-            ];
-            
-            try {
-                // Fetch submissions folder via GitHub API (with User-Agent to avoid rate limit)
-                const response = await fetch('https://api.github.com/repos/q-variance/challenge/contents/submissions?ref=main', {
-                    headers: { 'User-Agent': 'Q-Variance Leaderboard' }
-                });
-                if (!response.ok) throw new Error(`API error: ${response.status} ${response.statusText}`);
-                const dirs = await response.json();
-                
-                const submissions = [];
-                
-                for (const dir of dirs) {
-                    if (dir.type !== 'dir') continue;
-                    const subName = dir.name;
-                    
-                    // Fetch README.md
-                    const readmeResponse = await fetch(`https://api.github.com/repos/q-variance/challenge/contents/submissions/${subName}/README.md?ref=main`, {
-                        headers: { 'User-Agent': 'Q-Variance Leaderboard' }
-                    });
-                    if (!readmeResponse.ok) continue;
-                    const readme = await readmeResponse.json();
-                    const readmeContent = atob(readme.content);
-                    
-                    // Parse R² and params from README (simple regex)
-                    const r2Match = readmeContent.match(/R²[:\s]*([0-9.]+)/i);
-                    const paramsMatch = readmeContent.match(/Params[:\s]*([0-9]+)/i);
-                    const r2 = r2Match ? parseFloat(r2Match[1]) : 0;
-                    const params = paramsMatch ? parseInt(paramsMatch[1]) : 'N/A';
-                    
-                    submissions.push({
-                        name: subName,
-                        r2: r2,
-                        params: params,
-                        date: readme.sha.substring(0,10)  # Commit hash as date proxy
-                    });
-                }
-                
-                // Sort by R² descending
-                submissions.sort((a, b) => b.r2 - a.r2);
-                
-                if (submissions.length === 0) {
-                    renderTable(fallbackRows);
-                    return;
-                }
-                
-                // Combine fallback and fetched
-                const allRows = [...fallbackRows, ...submissions];
-                allRows.sort((a, b) => b.r2 - a.r2);
-                
-                renderTable(allRows);
-            } catch (error) {
-                console.error('Load error:', error);
-                body.innerHTML = '<tr><td colspan="7" class="error">API error—using fallback data. Check console for details.</td></tr>';
-                renderTable(fallbackRows);
-            }
-        }
+        // 3. Added 'notes' property to sample data
+        const entries = [
+            { rank: 1, submission: "simu.ai", author: "Thijs", params: "4: &sigma;, drift, shape factor 3/2, and sampling rate", status: "withdrawn", date: "2025-12-11", notes: "Variance drawn from inverse-Gamma distribution with shape factor 3/2, combined with regime-switching, Fit is near-perfect but high degree of randomness means that q-variance is only seen over very long time periods, and score goes below threshold with reasonable changes to e.g. SAMPLES_PER_DAY or MAX_WINDOW_DAYS." },
+            { rank: 2, submission: "tags", author: "Edouard", params: "&sigma;, drift, shape factor 3/2", status: "rejected", date: "2025-12-14", notes: "Another inverse-Gamma entry. Instability of this distribution (variance is undefined) means that the model does not reliably converge. Note that adjusting a parameter like shape factor to match q-variance by theory is treated the same as adjusting it empirically, because in either case the model is being adjusted to fit a desired result." },
+            { rank: 3, submission: " ", author: "Aleh", params: "&sigma;, drift, shape factor 3/2", status: "rejected", date: "2025-12-14", notes: "Another inverse-gamma model. Advantage of these models is they converge to q-variance in theory over very long times, problem is that if stocks behaved like this you would never see q-variance except on average over centuries of data." },
+            { rank: 4, submission: " ", author: "ShengQuan", params: "&sigma;, drift, shape factor 3/2", status: "rejected", date: "2025-12-14", notes: "Another inverse-gamma model, same sampling issue." },
+             { rank: 5, submission: "Luke", author: "Luke", params: "drift, base volatility, jumps probability per day, jump standard deviation", status: "rejected", date: "2025-12-15", notes: "Uses stochastic jumps, exceeds parameter limit." },
+             { rank: 6, submission: "equitquant.dev", author: "Dragon", params: "sigma, mu, kappa, c_int, a_shape", status: "rejected", date: "2025-12-24", notes: "Uses stochastic volatility, exceeds parameter limit, result depends on simulation time." },
+             { rank: 7, submission: "tingjun", author: "tingjun", params: "drift, base volatility, b", status: "rejected", date: "2025-12-24", notes: "Uses stochastic volatility, result depends on simulation time." },
+             { rank: 8, submission: "stochastic vol", author: "Grok", params: "5", status: "rejected", date: "2025-11-30", notes: "Thank you for playing." }
+        ];
+
+        const tableBody = document.getElementById('table-body');
         
-        function renderTable(rows) {
-            const body = document.getElementById('table-body');
-            body.innerHTML = '';
-            
-            rows.forEach((row, index) => {
-                const status = row.r2 >= 0.92 ? 'Passed' : 'Failed';
-                const rowClass = status === 'Passed' ? 'passed' : 'failed';
-                body.innerHTML += `
-                    <tr class="${rowClass}">
-                        <td>${index + 1}</td>
-                        <td>${row.name}</td>
-                        <td>${row.author || 'Unknown'}</td>
-                        <td>${row.r2.toFixed(4)}</td>
-                        <td>${row.params}</td>
-                        <td>${status}</td>
-                        <td>${row.date}</td>
-                    </tr>
-                `;
-            });
-            
-            if (rows.length === 0) {
-                body.innerHTML = '<tr><td colspan="7" class="no-subs">No submissions yet. Be the first!</td></tr>';
-            }
-        }
-        
-        // Load on page load
-        window.onload = loadSubmissions;
+        // Clear loading message
+        tableBody.innerHTML = "";
+
+        // 4. Update the loop to include the new cell
+        entries.forEach(entry => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${entry.rank}</td>
+                <td>${entry.submission}</td>
+                <td>${entry.author}</td>
+                <td>${entry.params}</td>
+                <td>${entry.status}</td>
+                <td>${entry.date}</td>
+                <td>${entry.notes}</td> 
+            `;
+            tableBody.appendChild(row);
+        });
     </script>
 </body>
 </html>
