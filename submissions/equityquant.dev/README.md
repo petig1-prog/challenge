@@ -98,7 +98,7 @@ This ensures that:
 - Corresponds to calm market regimes
 
 No additional free parameter is introduced at this stage;  
-the per-shock variance is fully determined by \( \sigma_0 \) and the stationary mean intensity.
+the per-shock variance is fully determined by $\( \sigma_0 \)$ and the stationary mean intensity.
 
 ---
 
