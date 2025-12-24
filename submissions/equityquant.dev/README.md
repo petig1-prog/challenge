@@ -73,7 +73,7 @@ $$
 Conditional on $N_t$, daily log-returns are generated as:
 
 $$
-r_t \mid N_t \sim \mathcal{N}\left(0,\, s_{\text{unit}}^2 \cdot N_t\right)
+r_t \mid N_t \sim \mathcal{N}\left(0,\ s_{\text{unit}}^2 \cdot N_t\right)
 $$
 
 This implies:
