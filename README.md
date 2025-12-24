@@ -10,7 +10,7 @@ $\sigma^2(z) = \sigma_0^2 + \frac{(z-z_0)^2}{2}$
 
 where $z = x/\sqrt{T}$, and $x$ is the log price change over the period, adjusted for drift (the parameter $z_0$ accounts for small asymmetries). The figure above illustrates q-variance for stocks from the S&P 500, and periods $T$ of 1-26 weeks. Blue points are variance vs $z$ for individual periods, blue line is average variance as a function of $z$, red line is the q-variance curve. 
 
-Q-variance affects everything from option pricing to how we measure and talk about volatility. Read the [Q-Variance WILMOTT article](Q-Variance_Wilmott_July2025.pdf) for more details and examples. See the competition announcement (5-Dec-2025) in the WILMOTT forum [here](https://forum.wilmott.com/viewtopic.php?p=889508&sid=0eb1fdd23cee0e6824de7353248d2e22#p889503).
+Q-variance affects everything from option pricing to how we measure and talk about volatility. Read the [Q-Variance WILMOTT article](Q-Variance_Wilmott_July2025.pdf) for more details and examples. See the competition announcement (5-Dec-2025) in the WILMOTT forum [here](https://forum.wilmott.com/viewtopic.php?p=889508&sid=0eb1fdd23cee0e6824de7353248d2e22#p889503). For an update on submissions as of end-2025 see [here](subsummary.md).
 
 To take part in the challenge, a suggested first step is to replicate the above figure using the code and market data supplied. Then repeat using simulated data from your model, and score it as described below.
 
@@ -55,6 +55,7 @@ To make your entry official:
 1. Fork this repository
 2. Place your model output in `submissions/your_team_name/` as:
    - `dataset.parquet` (must have columns: ticker, date, T, z, sigma)
+   - CSV file of daily prices (must have column: Price)
 3. Add a `README.md` in your folder with:
    - Team name
    - Short model description
@@ -67,6 +68,10 @@ Q: Is q-variance a well-known "stylized fact"?
 
 A: No, a stylized fact is a general observation about market data, but q-variance is a **falsifiable prediction** because the multiplicative constant on the quadratic term is not a fit, it is set by theory at 0.5. The same formula applies for all period lengths T. As far as we are aware this is the most clear-cut and easily tested example of a model prediction in finance.
 
+Q: Is it only noticeable over very long time series, or by averaging the results from hundreds of different stocks?
+
+A: No, you can see q-variance over normal time scales such as 20 years of data. It holds not just for stocks, but even for things like Bitcoin or bond yields (see the [article](Q-Variance_Wilmott_July2025.pdf)). If your model only seems to show q-variance over much longer simulations then it will be sensitive to small changes (e.g. to the exact simulation time) and it also won't be realistic.
+
 Q: Is q-variance about implied volatility?
 
 A: No, it is about asset price volatility. Q-variance does not involve option prices or implied volatility. There is a direct connection between q-variance and the implied volatility smile, but that is not the subject of this competition.
@@ -77,7 +82,7 @@ A: Not to our knowledge, and we have asked many experts, but please bring any re
 
 Q: Is q-variance a large effect?
 
-A: Yes, the minimum variance is about half the total variance so this is a large effect. If you are modelling variance then you do need to take q-variance into account. Otherwise it is like modelling the arc of a cannonball, not as a parabola, but as a straight line plus noise (not recommended). 
+A: Yes, the minimum variance is about half the total variance so this is a large effect. If you are modelling variance then you do need to take q-variance into account.
 
 Q: Does q-variance have implications for quantitative finance?
 
@@ -93,7 +98,7 @@ A: Yes, it implies that price-change follows the q-distribution which is a parti
 
 Q: How long a time series do we need?
 
-A: To reproduce Figure 1 you will need around 5e6 time points. That works out to about 20K years of data. However it isn't very realistic if q-variance is only visible over extremely long time periods, because with stocks you can see it with less than 20 years of data. [Figure 6](Figure_6.png) is a version of Figure 3 where we have used only periods of T=5 so the results are noisier. To compare your model, divide the data into 500 segments, each in a column labelled "V1", "V2", etc., create your parquet file but only for periods T=5 (or filter this later), and run `score_submission.py`. This will produce a plot like Figure 6, where now the separate columns are treated as representing individual stocks.
+A: To reproduce Figure 1 you will need around 5e6 time points. That works out to about 20K years of data. However it isn't very realistic if q-variance is only visible over extremely long time periods, because with stocks you can see it with less than 20 years of data. To test your model, divide the data into 500 segments, each in a column labelled "V1", "V2", etc., create your parquet file, and run `score_submission.py`. This will produce a plot like [Figure 3](Figure_3.png), where now the separate columns are treated as representing individual stocks.
 
 Q: Why should I enter this competition?
 
