@@ -48,7 +48,7 @@ Next, simulate a long series of daily prices using your model, and save as a CSV
 
 Finally, use `score_submission.py` to read your `dataset.parquet` (must match format: ticker, date, T, z, sigma). This will bin the values of $z$ in the range from -0.6 to 0.6 as in the figure, and compute the average variance per bin. It also computes the R² of your binned averages to the q-variance curve $\sigma^2(z) = \sigma_0^2 + (z-z_0)^2/2$.
 
-The threshold for the challenge is R² ≥ 0.995 with no more than three free parameters. A free parameter includes parameters in the model that, when modified within reasonable bounds, affect the score. This includes tuning parameters such as base volatility or drift, but also parameters which are specifically set within the model to achieve q-variance (and note that if the model is unstable even apparently innocuous settings can influence the results). The price-change distribution in $z$ should also be time-invariant, so the model should be independent of period length $T$. If your model doesn't tick all the boxes, please enter it anyway because it may qualify for an honourable mention.
+The threshold for the challenge is R² ≥ 0.995 with no more than three free parameters. A free parameter includes parameters in the model that, when modified within reasonable bounds, affect the score. This includes tuning parameters such as base volatility or drift, but also parameters which are specifically set within the model to achieve q-variance (and note that if the model is unstable even apparently innocuous settings can influence the results). The aim is to fit the specific curve in the figure, so you will need one parameter to achieve a small offset. The price-change distribution in $z$ should also be time-invariant, so the model should be independent of period length $T$. If your model doesn't tick all the boxes, please enter it anyway because it may qualify for an honourable mention.
 
 To make your entry official:
 
@@ -99,6 +99,10 @@ A: Yes, it implies that price-change follows the q-distribution which is a parti
 Q: How long a time series do we need?
 
 A: To reproduce Figure 1 you will need around 5e6 time points. That works out to about 20K years of data. However it isn't very realistic if q-variance is only visible over extremely long time periods, because with stocks you can see it with less than 20 years of data. To test your model, divide the data into 500 segments, each in a column labelled "V1", "V2", etc., create your parquet file, and run `score_submission.py`. This will produce a plot like [Figure 3](Figure_3.png), where now the separate columns are treated as representing individual stocks.
+
+Q: Some parameters in my model were preset, do they still count towards the limit of three?
+
+A: If changing them within reasonable bounds affects the result, then yes they count. Note that the aim is to fit the specific quadratic in the figure, so you will need a parameter to achieve the small horizontal offset. It's not enough to fit the case where there is no offset, otherwise we could remove the offset parameter from the q-variance curve also.
 
 Q: Why should I enter this competition?
 
