@@ -2,8 +2,8 @@
 
 **Team name:** equityquant.dev  
 **Contact:** Yi-Lung (Dragon) Tsai — ytsai@equityquant.dev   
-
 **Model Description:** please see below
+
 ---
 
 ## Model Summary
