@@ -1,7 +1,6 @@
 # EquityQuant.dev Model 
 
 **Team name:** equityquant.dev  
-**Contact:** Yi-Lung (Dragon) Tsai — ytsai@equityquant.dev   
 **Model Description:** please see below
 
 ---
@@ -173,4 +172,7 @@ This format is fully supported by the official `score_submission.py` script, whi
 automatically concatenates the split files when `dataset.parquet` is not present.
 No data has been modified or filtered; the three files together form the complete
 submission dataset.
+
+## Contact 
+Thelonious Casey — tcasey@equityquant.dev
 
