@@ -159,7 +159,7 @@ The Poisson cap is set sufficiently high that it is **rarely binding** and does 
 
 ex: n_days = 100K 
 <p align="center">
-  <img src="result1.png" width="650">
+  <img src="Results_n_days_100K.png" width="650">
 </p>
 
 | Simulation Length (n_days) | σ₀ (fitted) | z₀ (fitted) |    R² |
