@@ -12,9 +12,9 @@ In this implementation, the variance update follows discrete-time GARCH(1,1) log
 ## Parameters
 
 The model utilizes 3 primary parameters optimized for the highest $R^2$ fit:
-- **Target Annual Volatility ($\sigma$):** $0.095$
-- **Annual Expected Return ($\mu$):** $0.095$
-- **Persistence Factor ($\lambda$):** $0.747$
+- **Target Annual Volatility ($\sigma$):** $0.0925$
+- **Annual Expected Return ($\mu$):** $0.1$
+- **Persistence Factor ($\lambda$):** $0.7425$
 
 ## Simulation
 The simulation generates a synthetic price history consisting of **40 independent samples**, each spanning **2,500 trading days** (approx. 10 years). Each sample is treated as a unique "virtual ticker" to ensure independent de-meaning during window analysis.
