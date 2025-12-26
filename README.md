@@ -65,8 +65,8 @@ To make your entry official:
 
 Submission tips:
 - Check your model is robust to things like the number of simulation steps or sample lengths, otherwise these are counted as parameters. The model data should converge to the parabola, not just match it for a particular choice of simulation time.
-- Parameters need to include a drift or offset, because the aim is to fit the specific parabola in Figure 1 which has a small offset.
 - Something counts as a parameter if it is adjusted to fit the desired result, or if changing it within reasonable bounds affects the result.
+- Parameters need to include a drift or offset, because the aim is to fit the specific parabola in Figure 1 which has a small offset.
 - The model should be T-invariant, so changing the period T should not give a very different result, either in terms of the q-variance plot or the distribution.
 - Make sure that you submit a sample time series and the code to replicate the model, not just a parquet file and a plot.
 - Remember the parabola in Figure 1 matches real data, so to succeed your model will need to produce stable and realistic behaviour, otherwise changing internal numbers will affect the results and count as parameters. 
